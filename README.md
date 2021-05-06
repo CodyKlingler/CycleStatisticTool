@@ -8,33 +8,20 @@ Metrics that are currently either displayed, transmitted, or otherwise calculate
 
 
 
-Speed and Average Speed
-
-Distance
-
-Acceleration
-
-Incline Angle
-
-Longitude and Latitude
-
-Elevation
-
-Cadence (pedals per minute)
-
-Angular Velocity of Pedal
-
-Power
-
-Calories Burned
-
-Torque
-
-Gear Ratio
-
-Average Efficiency (distance per unit energy)
-
-Instantaneous Efficiency (speed per unit power)
+	Speed and Average Speed
+	Distance
+	Acceleration
+	Incline Angle
+	Longitude and Latitude
+	Elevation
+	Cadence (pedals per minute)
+	Angular Velocity of Pedal
+	Power
+	Calories Burned
+	Torque
+	Gear Ratio
+	Average Efficiency (distance per unit energy)
+	Instantaneous Efficiency (speed per unit power)
 
 
 
@@ -43,12 +30,9 @@ Instantaneous Efficiency (speed per unit power)
 Metrics that are planned but not yet implemented include:
 
 
-
-Wind Direction
-
-Wind Speed
-
-Compass 
+	Wind Direction
+	Wind Speed
+	Compass 
 
 
 
@@ -81,13 +65,9 @@ TODO:
 
 
 1. Clean up codebase. (see comments in main, updateEvent.h, and Stat.h)
-
 2. Fix gear ratio and incline angle inaccuracies.
-
 3. Add charging ports to housing
-
 4. Add a voltage regulator and implement lithium batteries to secondary microcontroller.
-
 5. Design housing for secondary microcontroller, potentially compact the current design.
 
 
