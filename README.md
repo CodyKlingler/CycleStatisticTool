@@ -2,7 +2,7 @@
 
 This code is for my 2021 senior project, the Cycle Statistic Tool (CST). The CST is composed of two microcontrollers that collect and relay information about a cycling trip via Bluetooth Low Energy (BLE). This information is displayed on on a eink display that is mounted on the handlebars, but can also be displayed and recorded by a seperate mobile app. My [senior project partner](https://github.com/Jacob-Hoff-man/) wrote a [mobile app](https://github.com/Jacob-Hoff-man/Companion) in Xamarin with a database in SQLite.
 
-The code needs a bit of polishing and commenting because it was rushed to meet a deadline, but it works and is fairly maintainable. My next step in the project will be to clean this up as you can see in the TODO section.
+The code needs a bit of polishing and commenting because it was rushed to meet a deadline, but it works and is maintainable. My next step in the project will be to clean this up as you can see in the TODO section.
 
 
 
