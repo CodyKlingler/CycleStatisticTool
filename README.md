@@ -8,6 +8,7 @@ Supporting documents for the Cycle Statistic Tool can be found in [this](https:/
 
 
 The layout of the Cycle Statistic Tool (wind sensing has not yet been implemented)
+![](../master/assets/schematic.jpg){:class="img-responsive"}
 ![](../master/assets/schematic.jpg){:height="50%" width="50%"}
 
 
