@@ -8,12 +8,11 @@ Supporting documents for the Cycle Statistic Tool can be found in [this](https:/
 
 
 The layout of the Cycle Statistic Tool (wind sensing has not yet been implemented)
-![](../master/assets/schematic.jpg){:class="img-responsive"}
-![](../master/assets/schematic.jpg){:height="50%" width="50%"}
+![](../master/assets/schematic.jpg | width=500px)
 
 
 The housing for the primary microcontroller.
-![](../master/assets/handlebars.jpg){:height="700px" width="400px"}
+![](../master/assets/handlebars.jpg)
 
 
 The code needs a bit of polishing and commenting because it was rushed to meet a deadline, but it works and is maintainable. My next step in the project will be to clean this up as you can see in the TODO section.
