@@ -2,6 +2,9 @@
 
 This code is for my 2021 senior project, the Cycle Statistic Tool (CST). The CST is composed of two microcontrollers that collect and relay information about a cycling trip via Bluetooth Low Energy (BLE). This information is displayed on on a eink display that is mounted on the handlebars, but can also be displayed and recorded by a seperate mobile app. My [senior project partner](https://github.com/Jacob-Hoff-man/) wrote a [mobile app](https://github.com/Jacob-Hoff-man/Companion) in Xamarin with a database in SQLite.
 
+![](../master/assets/handlebars.jpg)
+
+
 The code needs a bit of polishing and commenting because it was rushed to meet a deadline, but it works and is maintainable. My next step in the project will be to clean this up as you can see in the TODO section.
 
 
@@ -64,9 +67,29 @@ Metrics that are planned but not yet implemented include:
 ## Hardware
 
 
+![Block Diagram detailing component connections](../master/assets/block_diagram.jpg)
+
+
 
 MICROCONTROLLERS
+
+![](../master/assets/primary_microcontrollers.jpg)
+
+
+![](../master/assets/secondary_microcontrollers.jpg)
+
 >The primary and secondary microcontrollers are both Arduino Nano 33 IoT's. These boards have a built in IMU for measuring 3-axis acceleration and 3-axis angular velocity, a BLE module for transmitting data wirelessly with low energy usage, and a wifi module. These features combined with their small form factor make them an ideal candidate for this project. The microcontrollers are programmed in C++ using the Arduino IDE.
+
+
+
+
+DISPLAY AND DISPLAY BREAKOUT
+
+![](../master/assets/display.jpg)
+
+>The display and display breakout are connected to the primary microcontroller inside of the encasement on the handlebars. the display breakout acts as a data buffer and controller for the display, which connects to it directly. The eink display that was selected has a very low current draw and is easy to see in the daylight, but can only updated once every 3 minutes. The display shows rolling averages of values recorded since the display update in a table format. This is not a functionality included in the libraries for the display.
+
+
 
 
 
@@ -76,6 +99,9 @@ BATTERIES
 
 
 IR SENSOR
+
+![](../master/assets/ir_sensor.jpg)
+
 >The IR sensor mounted on the frame of the bicycle faces the path of an aluminum disk which is mounted on the axle. This allows us to effectively count the rotations of the tire, which is then used to calculate speed, distance, and acceleration. The signal produced by the IR sensor is a digital square wave where LOW corresponds to the aluminum disk reflecting the infrared light emitted by the sensor. This signal must be debounced to increase accuracy.
 
 
@@ -88,16 +114,14 @@ IMU
 
 
 STRAIN GAUGES AND LOADCELL AMPLIFIER
+
+![](../master/assets/strain_gauges.jpg)
+
 >The strain gauges are variable resistors which change value based on the deflection of the crank arm. This deflection is caused by the torque applied to the pedal by the cyclist. The strain gauges are extremely sensitive and volatile so they must be handled with care. Proper application procedures are vital to mounting these sensors on the crank arm. The strain gauges are assembled in a wheatstone bridge where both the input and output voltages are measured by a load cell amplifier (HX711). This load cell amplifier outputs a digital signal corresponding to the strain on the crank arm. The strain values measured must be tared and a calibration factor applied in order to get measurements of torque or mass. The calibration factor can be found by placing known masses on the crank arm. Change in the strain value should have a linear relationship with mass. Measurements from the strain gauges are used in calculations for power, calories burned, and torque.
 
 The strain gauge model that was used is the Micro-Measurements EA-13-250BF-350.
 
 
-
-
-
-DISPLAY AND DISPLAY BREAKOUT
->The display and display breakout are connected to the primary microcontroller inside of the encasement on the handlebars. the display breakout acts as a data buffer and controller for the display, which connects to it directly. The eink display that was selected has a very low current draw and is easy to see in the daylight, but can only updated once every 3 minutes. The display shows rolling averages of values recorded since the display update in a table format. This is not a functionality included in the libraries for the display.
 
 
 
