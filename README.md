@@ -8,11 +8,11 @@ Supporting documents for the Cycle Statistic Tool can be found in [this](https:/
 
 
 The layout of the Cycle Statistic Tool (wind sensing has not yet been implemented)
-![](../master/assets/schematic.jpg|width=500)
+<img src="../master/assets/schematic.jpg" width=50% height=50%>
 
 
 The housing for the primary microcontroller.
-![](../master/assets/handlebars.jpg)
+<img src="../master/assets/handlebars.jpg" width=50% height=50%>
 
 
 The code needs a bit of polishing and commenting because it was rushed to meet a deadline, but it works and is maintainable. My next step in the project will be to clean this up as you can see in the TODO section.
@@ -69,6 +69,7 @@ Metrics that are planned but not yet implemented include:
 3. Add charging ports to housing
 4. Add a voltage regulator and implement lithium batteries to secondary microcontroller.
 5. Design housing for secondary microcontroller, potentially compact the current design.
+6. Modify display code so that tables are indexed by row and column number rather than variables.
 
 
 
@@ -99,7 +100,7 @@ DISPLAY AND DISPLAY BREAKOUT
 
 ![](../master/assets/display.jpg)
 
->The display and display breakout are connected to the primary microcontroller inside of the encasement on the handlebars. the display breakout acts as a data buffer and controller for the display, which connects to it directly. The e-ink display that was selected has a very low current draw and is easy to see in the daylight but can only updated once every 3 minutes. The display shows rolling averages of values recorded since the display update in a table format. This is not a functionality included in the libraries for the display.
+>The display and display breakout are connected to the primary microcontroller inside of the encasement on the handlebars. the display breakout acts as a data buffer and controller for the display, which connects to it directly. The e-ink display that was selected has a very low current draw and is easy to see in daylight, but can only be updated once every 3 minutes. The display shows rolling averages of values recorded since the display update in a table format. This is not a functionality included in the libraries for the display.
 
 
 
