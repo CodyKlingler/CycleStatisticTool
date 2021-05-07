@@ -8,7 +8,7 @@ Supporting documents for the Cycle Statistic Tool can be found in [this](https:/
 
 
 The layout of the Cycle Statistic Tool (wind sensing has not yet been implemented)
-![](../master/assets/schematic.jpg|width=500px)
+![](../master/assets/schematic.jpg|width=500)
 
 
 The housing for the primary microcontroller.
