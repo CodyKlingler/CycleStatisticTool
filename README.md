@@ -6,7 +6,11 @@ This code is for my 2021 senior project, the Cycle Statistic Tool (CST). The CST
 Supporting documents for the Cycle Statistic Tool can be found in [this](https://github.com/CodyKlingler/CycleStatisticToolBinder) repository.
 
 
-![](../master/assets/riding.mp4)
+<video controls>
+  <source src="../master/assets/riding.mp4" type="video/mp4">
+</video>
+
+
 
 
 
