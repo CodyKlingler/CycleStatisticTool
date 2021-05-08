@@ -6,6 +6,9 @@ This code is for my 2021 senior project, the Cycle Statistic Tool (CST). The CST
 Supporting documents for the Cycle Statistic Tool can be found in [this](https://github.com/CodyKlingler/CycleStatisticToolBinder) repository.
 
 
+![](../master/assets/riding.mp4)
+
+
 
 The layout of the Cycle Statistic Tool (wind sensing has not yet been implemented)
 <p align="center">
@@ -200,8 +203,7 @@ Assuming that the crankarm comes preassembled with microcontroller, battery, and
 3. Attach aluminum disc to rear tire axle using adhesive.
 4. Secure casement on handlebars with zip tie.
 5. Secure IR Sensor to frame with solid core wire.
-
-
+6. Secure loose wires with zip ties or tape.
 
 
 
@@ -212,4 +214,6 @@ Setup Steps Before Use
 4. If desired, connect the mobile app via Bluetooth.
 
 
-6. Secure loose wires with zip ties or tape.
+Video of the steps taken to start the Cycle Statistic Tool:
+![](../master/assets/starting.mp4)
+
