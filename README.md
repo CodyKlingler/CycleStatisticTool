@@ -8,13 +8,10 @@ Supporting documents for the Cycle Statistic Tool can be found in [this](https:/
 <br>
 <p align="center">
 <img src="../master/assets/riding.gif" width=40% height=40%>
-     <br>Cycle Statistic Tool linked to companion app
+     <br>Cycle Statistic Tool linked to companion app. note: distance is in km, not meters.
 </p>
 
-
-
-<br><br>
-
+<br>
 
 <p align="center">
   <img src="../master/assets/schematic.jpg" width=66% height=66%>
@@ -23,7 +20,7 @@ Supporting documents for the Cycle Statistic Tool can be found in [this](https:/
 
 
 
-The code needs a bit of polishing and commenting because it was rushed to meet a deadline, but it works and is maintainable. My next step in the project will be to clean this up as you can see in the TODO section.
+The code needs a bit of polishing and commenting, but it works and is maintainable. My next step in the project will be to clean this up as you can see in the TODO section.
 
 
 
@@ -74,7 +71,7 @@ Metrics that are planned but not yet implemented include:
 
 1. Clean up codebase. (see comments in main, updateEvent.h, and Stat.h)
 2. Fix gear ratio and incline angle inaccuracies.
-3. Add charging ports to housing
+3. Add charging ports to housing.
 4. Add a voltage regulator and implement lithium batteries to secondary microcontroller.
 5. Design housing for secondary microcontroller, potentially compact the current design.
 6. Modify display code so that tables are indexed by row and column number rather than variables.
@@ -85,54 +82,60 @@ Metrics that are planned but not yet implemented include:
 
 ## Hardware
 
-The block diagram below details each component and its connections.
 
 
-![](../master/assets/block_diagram.jpg)
+<p align="center">
+  <img src="../master/assets/block_diagram.jpg" width=66% height=66%><br>
+  The block diagram below details each component and its connections.
+</p>
 
 
 
 MICROCONTROLLERS
 
-![](../master/assets/primary_microcontroller.jpg)
+>The primary and secondary microcontrollers are both Arduino Nano 33 IoT's. These boards have a built in IMU for measuring 3-axis acceleration and 3-axis angular velocity, a BLE module for transmitting data wirelessly with low energy usage, and a Wi-Fi module. These features, combined with their small form factor, make them an ideal candidate for this project. The microcontrollers are programmed in C++ using the Arduino IDE.
 
 
-![](../master/assets/secondary_microcontroller.jpg)
-
-
-The housing for the primary microcontroller.
 <p align="center">
-  <img src="../master/assets/handlebars.jpg" width=66% height=66%>
+  <img src="../master/assets/handlebars.jpg" width=66% height=66%><br>
+  The housing for the primary microcontroller.<br>
+</p>
+
+<p align="center">
+  <img src="../master/assets/primary_microcontroller.jpg" width=66% height=66%><br>
+  The primary microcontroller inside of its housing.<br>
 </p>
 
 
->The primary and secondary microcontrollers are both Arduino Nano 33 IoT's. These boards have a built in IMU for measuring 3-axis acceleration and 3-axis angular velocity, a BLE module for transmitting data wirelessly with low energy usage, and a Wi-Fi module. These features combined with their small form factor make them an ideal candidate for this project. The microcontrollers are programmed in C++ using the Arduino IDE.
-
-
+<p align="center">
+  <img src="../master/assets/secondary_microcontroller.jpg" width=66% height=66%><br>
+  The housing for the primary microcontroller.<br>
+</p>
 
 
 DISPLAY AND DISPLAY BREAKOUT
 
-![](../master/assets/display.jpg)
+>The display and display breakout are connected to the primary microcontroller inside of the encasement on the handlebars. The display breakout acts as a data buffer and controller for the display, which connects to it directly. The e-ink display that was selected has a very low current draw and is easy to see in daylight, but can only be updated once every 3 minutes. The display shows rolling averages of values recorded since the display update in a table format. This is not a functionality included in the libraries for the display.
 
->The display and display breakout are connected to the primary microcontroller inside of the encasement on the handlebars. the display breakout acts as a data buffer and controller for the display, which connects to it directly. The e-ink display that was selected has a very low current draw and is easy to see in daylight, but can only be updated once every 3 minutes. The display shows rolling averages of values recorded since the display update in a table format. This is not a functionality included in the libraries for the display.
-
-
+<p align="center">
+  <img src="../master/assets/display.jpg" width=66% height=66%><br>
+  The display after it is powered on.
+</p>
 
 
 
 BATTERIES
->The primary microcontroller is powered by a 3.7V lithium-ion battery. The logic level of both microcontrollers is 3.3V and can have an input voltage of 21V. The secondary microcontroller was also intended to be powered with a 3.7V lithium ion battery but would need a 5V voltage regulator because our load cell amplifier uses 5V logic. Our intended temporary solution to this issue was to use a USB battery bank, but all of the ones that were tested shut off due to their circuitry which disables low current draw. For the final presentation, three 1.5V AA batteries were used in series for a total output of 4.5V. This was done because of the lack of a voltage regulator and the issues with our USB battery banks. The secondary microcontroller needed to have its VUSB jumpers located on the back of the board shorted, and also to be powered via its USB port rather than VIN and GND pins in order to enable 5V output.
+>The primary microcontroller is powered by a 3.7V lithium-ion battery. The logic level of both microcontrollers is 3.3V and can have an input voltage of 21V. The secondary microcontroller was also intended to be powered with a 3.7V lithium ion battery, but would need a 5V voltage regulator because our load cell amplifier uses 5V logic. Our intended temporary solution to this issue was to use a USB battery bank, but all of the ones that were tested shut off due to their circuitry which disables low current draw. For the final presentation, three 1.5V AA batteries were used in series for a total output of 4.5V. This was done because of the lack of a voltage regulator and the issues with our USB battery banks. The secondary microcontroller needed to have its VUSB jumpers located on the back of the board shorted, and also to be powered via its USB port rather than VIN and GND pins in order to enable 5V output.
 
 
 
 IR SENSOR
+>The IR sensor mounted on the frame of the bicycle faces the path of an aluminum disk which is mounted on the axle. The other side is painted with black acrylic paint to prevent possible false readings. This allows us to effectively count the rotations of the tire, which is then used to calculate speed, distance, and acceleration. The signal produced by the IR sensor is a digital square wave where LOW corresponds to the aluminum disk reflecting the infrared light emitted by the sensor. This signal must be debounced to increase accuracy.
 
-![](../master/assets/ir_sensor.jpg)
-
->The IR sensor mounted on the frame of the bicycle faces the path of an aluminum disk which is mounted on the axle. This allows us to effectively count the rotations of the tire, which is then used to calculate speed, distance, and acceleration. The signal produced by the IR sensor is a digital square wave where LOW corresponds to the aluminum disk reflecting the infrared light emitted by the sensor. This signal must be debounced to increase accuracy.
-
-
+<p align="center">
+  <img src="../master/assets/ir_sensor.jpg" width=66% height=66%><br>
+  The IR sensor pointed at the disc aluminium disk (left) and the painted side of the axle (right).
+</p>
 
 
 IMU
@@ -142,22 +145,16 @@ IMU
 
 
 STRAIN GAUGES AND LOADCELL AMPLIFIER
-
-![](../master/assets/strain_gauges.jpg)
-
 >The strain gauges are variable resistors which change value based on the deflection of the crank arm. This deflection is caused by the torque applied to the pedal by the cyclist. The strain gauges are extremely sensitive and volatile so they must be handled with care. Proper application procedures are vital to mounting these sensors on the crank arm. The strain gauges are assembled in a Wheatstone bridge where both the input and output voltages are measured by a load cell amplifier (HX711). This load cell amplifier outputs a digital signal corresponding to the strain on the crank arm. The strain values measured must be tared and a calibration factor applied in order to get measurements of torque or mass. The calibration factor can be found by placing known masses on the crank arm. Change in the strain value should have a linear relationship with mass. Measurements from the strain gauges are used in calculations for power, calories burned, and torque.
 
-The strain gauge model that was used is the Micro-Measurements EA-13-250BF-350.
-
-
-
-
-
+<p align="center">
+  <img src="../master/assets/strain_gauges.jpg" width=66% height=66%><br>
+  The strain gauges mounted on the crank arm. Model: Micro-Measurements EA-13-250BF-350
+</p>
 
 
 GPS
 >The GPS is connected to the primary microcontroller through i2c and is mounted in the casement on the handlebars. The GPS is used to measure latitude, longitude, and altitude but could also be used to measure speed and cardinal direction. The i2c connection to the primary microcontroller is volatile, and occasionally (maybe once in 24 hours of usage) garbage data may be received. Both of these issues can cause the device to crash. The device can also take a while to find a fix which takes a connection to at least 4 satellites. This is due to the weak antenna of the GPS module. All of these problems could potentially be rectified by using a different module or using smart phone to relay GPS information.
-
 
 
 
@@ -220,6 +217,8 @@ Setup Steps Before Use
 4. If desired, connect the mobile app via Bluetooth.
 
 
-Video of the steps taken to start the Cycle Statistic Tool:
-![](../master/assets/starting.gif)
 
+<p align="center">
+  <img src="../master/assets/starting.gif" width=66% height=66%><br>
+  The steps taken to start the Cycle Statistic Tool.
+</p>
