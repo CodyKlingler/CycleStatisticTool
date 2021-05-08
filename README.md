@@ -5,20 +5,20 @@ This code is for my 2021 senior project, the Cycle Statistic Tool (CST). The CST
 
 Supporting documents for the Cycle Statistic Tool can be found in [this](https://github.com/CodyKlingler/CycleStatisticToolBinder) repository.
 
-
-![](../master/assets/riding.gif)
-
-
-
-The layout of the Cycle Statistic Tool (wind sensing has not yet been implemented)
+<br>
 <p align="center">
-  <img src="../master/assets/schematic.jpg" width=66% height=66%>
+<img src="../master/assets/riding.gif" width=40% height=40%>
+     <br>Cycle Statistic Tool linked to companion app
 </p>
 
 
-The housing for the primary microcontroller.
+
+<br><br>
+
+
 <p align="center">
-  <img src="../master/assets/handlebars.jpg" width=66% height=66%>
+  <img src="../master/assets/schematic.jpg" width=66% height=66%>
+  <br>The layout of the Cycle Statistic Tool (wind sensing has not yet been implemented)
 </p>
 
 
@@ -98,6 +98,13 @@ MICROCONTROLLERS
 
 
 ![](../master/assets/secondary_microcontroller.jpg)
+
+
+The housing for the primary microcontroller.
+<p align="center">
+  <img src="../master/assets/handlebars.jpg" width=66% height=66%>
+</p>
+
 
 >The primary and secondary microcontrollers are both Arduino Nano 33 IoT's. These boards have a built in IMU for measuring 3-axis acceleration and 3-axis angular velocity, a BLE module for transmitting data wirelessly with low energy usage, and a Wi-Fi module. These features combined with their small form factor make them an ideal candidate for this project. The microcontrollers are programmed in C++ using the Arduino IDE.
 
