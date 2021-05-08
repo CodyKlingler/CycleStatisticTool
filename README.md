@@ -6,11 +6,7 @@ This code is for my 2021 senior project, the Cycle Statistic Tool (CST). The CST
 Supporting documents for the Cycle Statistic Tool can be found in [this](https://github.com/CodyKlingler/CycleStatisticToolBinder) repository.
 
 
-<video controls>
-  <source src="../master/assets/riding.mp4" type="video/mp4">
-</video>
-
-
+![](../master/assets/riding.gif)
 
 
 
@@ -24,7 +20,6 @@ The housing for the primary microcontroller.
 <p align="center">
   <img src="../master/assets/handlebars.jpg" width=66% height=66%>
 </p>
-
 
 
 
@@ -219,5 +214,5 @@ Setup Steps Before Use
 
 
 Video of the steps taken to start the Cycle Statistic Tool:
-![](../master/assets/starting.mp4)
+![](../master/assets/starting.gif)
 
