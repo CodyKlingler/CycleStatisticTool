@@ -9,7 +9,7 @@
 
 class UpdateEvent {
 protected:
-	//all implementations of UpdateEvent should probably be singletons
+	//TODO: all implementations of UpdateEvent should probably be singletons
 public:
     Stat* stat;
     unsigned long updateTime;
@@ -22,8 +22,7 @@ public:
 
 };
 
-//TODO
-//change the following classes to be singletons.
+//TODO: change the following classes to be singletons.
 
 	//primary imu    -->    incline     later maybe:: acceleration, bumpiness
 class IMUEvent : public UpdateEvent {

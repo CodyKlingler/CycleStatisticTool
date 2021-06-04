@@ -20,6 +20,8 @@ extern Adafruit_GPS* GPSptr;
 Adafruit_IL0373 display(296, 128, EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY);
 
 //TODO: clean function call for adding elements to the table.
+//TODO: add support for multiple columns.
+//TODO: this code isn't very maintainable or clear.
 
 
 void displaySetup() {
@@ -34,6 +36,7 @@ void displaySetup() {
 const int charWidth = 6;
 const int charHeight = 9;
 
+//used an underscore for all of the table specific attributes.
 const int _leftPadding = 0; //gap that appears on the left side of the screen
 const int _padding = 1;    // used to pad on the left side of a few col's,
 const int _NameWidth = 10; //max width of name
@@ -53,6 +56,7 @@ int updateColumnLocations(int offset = 0) { //returns the end of the last column
     return _rightPadding;
 }
 
+//
 void printCol(const char* name, float value, const char* units, int height, int offset) {
     
     int bufferWidth = 8;
@@ -116,6 +120,7 @@ void updateDisplay() {
     delay(5); //need to give the buffer time to power on.
     display.begin();
 
+    //display seeting.
     display.setBlackBuffer(1, false);
     display.setColorBuffer(1, false);
     display.setRotation(2);
@@ -124,7 +129,7 @@ void updateDisplay() {
     display.setTextSize(1);
     display.setTextColor(EPD_BLACK);
 
-    //constants used for testing.. delete later
+    //TODO: constants used for testing.. delete later
     const float zero = 0.0000000;
 
     int bufferWidth = 9;

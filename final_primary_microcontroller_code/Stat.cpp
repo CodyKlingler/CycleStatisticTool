@@ -1,6 +1,6 @@
 #include "Stat.h"
 
-//
+//TODO: this is array is a little weird. could we do something else?
 Stat* Stat::statArray[24] = { 0 };
 
 Stat::Stat(char* uuid, BLEService service, char type, int rollingAvgLength) {
@@ -43,7 +43,7 @@ void Stat::updateAvg(float val) {
     delay(1);
 #endif
     value = val;
-    avgs[index] = val;// - base;
+    avgs[index] = val;
     int nextIndex = (index + 1) % avgLen;
     if (!rolledOver && !nextIndex) {
         rolledOver = 1;

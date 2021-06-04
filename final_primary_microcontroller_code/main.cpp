@@ -14,7 +14,7 @@ void updateSensors();
 
 
 extern unsigned long tripStartTime = 0;
-extern Stat** statArray = 0;
+extern Stat** globalStatArray = 0;
 extern Adafruit_GPS* GPSptr = 0;
 
 // PUT THIS IN PrimaryBLEHandling.h
@@ -46,20 +46,20 @@ void setup() {
 
     displaySetup(); //see display.h
 
-    //Quick Events
+    //Build quick events
     quickEventList.push_back(new IRTireEvent(CSTService, ROLLING_AVERAGE_POINTS));
 
     //need to fetch array from a stat
-    statArray = quickEventList.at(0)->stat->statArray;
-    //could this be done elsewhere??
+    globalStatArray = quickEventList.at(0)->stat->statArray;
+    //TODO: could this be done elsewhere??
 
-    //Slow Events
+    //Build slow events
     slowEventList.push_back(new GPSEvent(GPSService));
     slowEventList.push_back(new IMUEvent(CSTService, ROLLING_AVERAGE_POINTS));
 
     //need to fetch GPS for display from the GPSEvent..
     GPSptr = &(((GPSEvent*)slowEventList.at(0))->GPS); //get gpsevent (first in vec) and then get GPS* from it.
-    //should move to updateEvent.cpp. no need for main to have it.
+    //TODO: should move to updateEvent.cpp. (no need for main to have it)
 
 
     BLESetup();     //see PrimaryBLEHandling.h
@@ -73,6 +73,7 @@ int LEDSTATE = HIGH;
 unsigned long timer = 0;
 void loop() {
 
+    //Indicator to show that the device is running.
     if (millis() - timer > 1000) {
         LEDSTATE = (LEDSTATE == HIGH) ? LOW : HIGH;
         digitalWrite(2, LEDSTATE);
@@ -81,7 +82,6 @@ void loop() {
 
     updateSensors(); //calls sensor events if they haven't been fired in a while
     BLE.poll(); //checks for BLE Events.
-    //delay(1); //polling too quickly causes crashes.
 }
 
 void updateSensors() {

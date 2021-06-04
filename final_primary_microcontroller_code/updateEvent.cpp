@@ -33,11 +33,13 @@ bool IMUEvent::update() {
 	Serial.println("IMUEvent.update()"); //this verbose debugging is done because arduino lacks the ability to debug.
 #endif
 
+	//calls IMU hardware to retrieve acceleration values.
 	float accelX = myIMU->readFloatAccelX();
 	float accelY = myIMU->readFloatAccelY();
 	float accelZ = myIMU->readFloatAccelZ();
 
 	//calculates angle based on ratio of accelerations. would be much more accurate using 3-axis magnetic compass instead.
+	//TODO: subtract tire acceleration.
 	inclineAngle = -1 * (atan(accelY / accelZ) / (2 * PI / 360) + RESTING_ANGLE); 
 
 #ifdef VALUE_PRINT
@@ -62,8 +64,9 @@ bool IMUEvent::updateBLE() {
 }
 
 
-//IR-TIRE////IR-TIRE////IR-TIRE////IR-TIRE////IR-TIRE////IR-TIRE////IR-TIRE////IR-TIRE////IR-TIRE////IR-TIRE////IR-TIRE////IR-TIRE////IR-TIRE////IR-TIRE//
-
+/*
+//IR-TIRE
+*/
 
 extern float tireDiameter = 26;
 float* IRTireEvent::tireDiameterStat = 0;
@@ -74,11 +77,13 @@ IRTireEvent::IRTireEvent(BLEService service, int roll) {
 #endif
 
 	stat = new Stat(UUID_DISTANCE, service, _distance, 1); //distance
+
+	//add new statistics to stat array.
 	statArray[0] = stat;    //distance
 	statArray[1] = new Stat(UUID_ACCEL, service, _acceleration, roll);//acceleration
 	statArray[2] = new Stat(UUID_SPEED, service, _speed, roll); //speed
 	statArray[3] = new Stat(UUID_AVG_SPEED, service, _averageSpeed, 1); //distance/time
-	//must define quantity dataPoints Stats or you will get some pointer nonsense going on.
+	//must define quantity dataPoints(last argument) Stats or you will get some pointer nonsense going on.
 
 
 	tireDiameterStat = &tireDiameter;

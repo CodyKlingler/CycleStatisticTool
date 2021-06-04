@@ -11,6 +11,7 @@ extern BLEService PedalService = BLEService(UUID_PEDAL_SERVICE);
 extern Stat** statArray;
 extern float tireDiameter;
 
+//create statistics (creates characteristics and adds them to the service.)
 Stat calories(UUID_CALORIES, PedalService, _calories, 25);
 Stat cadence(UUID_CADENCE, PedalService, _cadence, 25);
 Stat power(UUID_POWER, PedalService, _power, 25);

@@ -14,9 +14,9 @@
 #define EPD_CS      5
 #define EPD_DC      6
 #define SRAM_CS     7
-#define EPD_RESET   8 // can set to -1 to share with RST
+#define EPD_RESET   8 // can set to -1 to share with arduino's RST
 #define EPD_BUSY    9 // can set to -1 to not use a pin (will wait a fixed delay)
-#define EPD_ENABLE  10  
+#define EPD_ENABLE  10  //comment out definition to disable powering off display between updates.
 
 
 #define RESTING_ANGLE 25.0

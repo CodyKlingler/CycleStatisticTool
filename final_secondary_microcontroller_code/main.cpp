@@ -11,7 +11,7 @@
 #include "HX711.h"
 #include "RollAvg.h"
 
-
+//TODO: create seperate definitions file to unclutter main.cpp
 #define UUID_CST_SERVICE "732ca8ca-b303-4e56-974a-bb642d11bb3b"
 
 #define UUID_POWER    "a1a882a8-dd89-4c86-99d3-b36045fa280d"
@@ -23,7 +23,7 @@
 #define LOADCELL_DOUT_PIN  2
 #define LOADCELL_SCK_PIN   3
 
-HX711 scale;
+
 
 #define CALCULATION_PERIOD 100
 #define BLE_UPDATE_PERIOD 2000
@@ -33,15 +33,16 @@ HX711 scale;
 #define PEDAL_SHAFT_LENGTH .175 //meters
 #define constant 15228.71
 
-
-LSM6DS3 myIMU(I2C_MODE, 0x6A);
+HX711 scale; //hardware load-cell amplifier
+LSM6DS3 myIMU(I2C_MODE, 0x6A); //hardware IMU
 
 //init as millis so you dont get a potentially large energy calculation
 unsigned long lastTimeMeasurementsUpdated = millis();
-unsigned long timed = 0;
+unsigned long lastTimePrintedBLEStatus = 0;
 unsigned long BLEUpdateTime = 0;
-unsigned long count = 0;
+unsigned long numberOfMeasurementsRecorded = 0;
 
+//TODO: perhaps we should make this update a value by reference? Seems odd.
 RollAvg torqueAv(AVG_LEN);
 RollAvg powerAv(AVG_LEN);
 RollAvg cadenceAv(AVG_LEN);
@@ -98,9 +99,9 @@ void loop() {
     BLE.poll();
 
 
-    if (millis() - timed > 5000) {
+    if (millis() - lastTimePrintedBLEStatus > 5000) {
         Serial.println("Waiting for connection..");
-        timed = millis();
+        lastTimePrintedBLEStatus = millis();
     }
 
     BLEDevice central = BLE.central();
@@ -114,7 +115,7 @@ void loop() {
         }
 
         BLECharacteristic powerChar = central.characteristic(UUID_POWER);
-        delayMicroseconds(30);
+        delayMicroseconds(30); //TODO: test this. may not be necessary. I dont recall why this was added.
         BLECharacteristic caloriesChar = central.characteristic(UUID_CALORIES);
         delayMicroseconds(30);
         BLECharacteristic cadenceChar = central.characteristic(UUID_CADENCE);
@@ -130,7 +131,7 @@ void loop() {
             if (millis() - BLEUpdateTime > BLE_UPDATE_PERIOD) {
                 Serial.println("Writing BLE data");
 
-                //Arduino BLE doesn't let you write floats (even though the characteristic is float type)
+                //Arduino's BLE library doesn't let you write floats (even though the characteristic is float type)
                 //My solution is to convert to unsigned long (i think compiler casts it to uint8_t afterward)
                 float powerF = powerAv.rollingAvg();//*((unsigned long*)&powerF)
                 float cadenceF = cadenceAv.rollingAvg();
@@ -148,15 +149,13 @@ void loop() {
 
     }
 
-
-
 }
 
 
 void updateMeasurements() {
     if (millis() - lastTimeMeasurementsUpdated < CALCULATION_PERIOD)
         return;
-    count++;
+    numberOfMeasurementsRecorded++;
 
     float x, y, z;
 
@@ -200,7 +199,7 @@ void updateMeasurements() {
 
 
 void printMeasurements() {
-    Serial.print(count);
+    Serial.print(numberOfMeasurementsRecorded);
 
     const int decimals = 3;
     Serial.print("\tmass\t");
@@ -226,20 +225,6 @@ void printMeasurements() {
 
     Serial.println();
 
-
-    /*
-    Serial.print("\ttorque\t");
-    Serial.print(torqueAv.rollingAvg(), decimals);
-
-    Serial.print("\tcadence\t");
-    Serial.print(cadenceAv.rollingAvg(), decimals);
-
-
-    Serial.print("\tpower\t");
-    Serial.print(powerAv.rollingAvg(), decimals);
-
-    Serial.println();
-    */
 }
 
 

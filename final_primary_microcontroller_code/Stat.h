@@ -4,6 +4,8 @@
 #include <ArduinoBLE.h>
 #include <CSTDefinitions.h>
 
+//class that enables the easier management of a recorded value by recording a rolling avg and updating bluetooth characteristics.
+
 class Stat {
 private:
     //BLEBroadcast, BLERead, BLEWriteWithoutResponse, BLEWrite, BLENotify, BLEIndicate

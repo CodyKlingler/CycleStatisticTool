@@ -7,12 +7,11 @@
 
 extern float tireDiameter;
 extern Adafruit_GPS* GPSptr;
-extern Stat** statArray;
+extern Stat** globalStatArray;
 extern unsigned long tripStartTime;
 extern BLEService CSTService;
 extern BLEService GPSService;
 extern BLEService PedalService;
-
 
 
 #endif
